@@ -26,7 +26,13 @@ We designed the blade using Blade Element Momentum (BEM) theory in MATLAB. The g
 
 **Key BEM relationships (used to generate chord/twist distributions):**
 
-<img src="{{ '/assets/images/bemeq.png' | relative_url }}" style="width:55%; max-width:520px; height:auto;" alt="BEM equations">
+<img src="{{ '/assets/images/bemeq.png' | relative_url }}" style="width:50%; max-width:420px; height:auto;" alt="BEM equations">
+
+**Flapwise Bending Analysis for FOS Estimation:**
+
+<img src="{{ '/assets/images/bending.png' | relative_url }}" style="width:55%; max-width:520px; height:auto;" alt="Blade Design Stress Considerations">
+<br><br>
+These flapwise moment, bending stress, torque density, and thrust-per-span distributions were computed at a representative high-speed case (15 m/s) to estimate peak structural loading along the blade and verify an adequate factor of safety for the printed rotor.
 
 ### CAD
 After generating the geometry, we built the blade in Autodesk Fusion 360 by importing the NACA 4412 cross-section and lofting multiple airfoil stations along the span using the MATLAB-generated chord and twist values. We designed a hub interface compatible with the wind tunnel test stand and ensured the final rotor fit within the test-section size constraints.
@@ -35,16 +41,20 @@ After generating the geometry, we built the blade in Autodesk Fusion 360 by impo
 The final blade set was 3D printed and assembled onto the hub. We prioritized repeatable geometry and structural stiffness to reduce deformation during testing. Surface finish was limited by layer lines, which we acknowledged as a likely contributor to increased drag in the experimental results.
 
 ### Wind-tunnel testing
-We tested the turbine at multiple wind speeds measured by the Pitot-static tube. For each wind speed setting, we swept the torque brake loading in small increments until we noticed the blade stall while recording wind speed, RPM, and power output. This produced power vs. RPM curves at each wind speed and allowed us to identify peak power operating points.
+We tested the turbine at multiple wind speeds measured by the Pitot-static tube. For each wind speed setting, we swept the torque brake loading in small increments until we noticed the blade stall while recording wind speed, RPM, and power output. This produced power vs. RPM curves at each wind speed and allowed us to identify peak power operating points. The follow graph shows our turbine performance at different wind speeds and torque brake voltages:
 
+<div style="text-align:center;">
+  <img src="{{ '/assets/images/turbine_exp.png' | relative_url }}"
+       style="width:55%; max-width:600px; height:auto; display:inline-block;"
+       alt="Experimental Turbine Data">
+</div>
+<br>
 ### Data analysis
 From the recorded data we computed tip-speed ratio and power coefficient:
-- TSR:  \(\lambda = \omega R / U\)
-- Power coefficient:  \(C_p = P / (0.5 \rho A U^3)\)
+- TSR: \\( \lambda = \frac{\omega R}{U} \\)
+- Power coefficient: \\( C_p = \frac{P}{0.5 \rho A U^3} \\)
 
 Peak measured power was 0.8335 W at 8.3 m/s and ~1280 RPM (TSR ≈ 2.42). The target condition of 800 RPM at 5.95 m/s corresponds to TSR ≈ 2.11. These results were compared to BEM predictions and a baseline Lab 4 rotor to evaluate the effect of the taper/twist design.
 
 ### My contribution
-I focused on the data processing and performance metrics: binning test data by wind speed, extracting peak power points, computing TSR and \(C_p\), and generating plots used in the final report and this portfolio page. I also helped connect the experimental power curve to a Weibull wind-speed model (k = 5, c = 5) to estimate long-term average power.
-
-![Photo of old radio]({{ "/assets/images/turbine_tunnel.png" | relative_url }}){: .inline-image-r}
+My focus was more specifically on the modeling in the design stage. More specifically, deriving the optimal blade geometry equations, quantizing our radii, and implementing the equations into a Matlab script to perform the optimization. I also did all the data analysis for post processing and performance metrics like: binning test data by wind speed, extracting peak power points, computing TSR and \\(C_p\\), and generating plots used in the final report and this portfolio page. I did the estimation for the long term experimental average power curve for a Weibull wind-speed model (k = 5, c = 5). This is used to see how the turbine will perform if implemented in a real wind farm.
