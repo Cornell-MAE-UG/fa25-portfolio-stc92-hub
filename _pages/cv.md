@@ -4,11 +4,11 @@ title: Salvatore Ciminello - Curriculum Vitae
 permalink: /cv/
 ---
 ## Curriculum Vitae
-
+A glance at my experiences holistically.<br>
 [Download my CV]({{ "/assets/CV.pdf" | relative_url }}) in PDF format.
 
 
-**Email:** [stc92@cornell.edu](mailto:stc92@cornell.edu) | | | **Phone:** +123 456 7890
+**Email:** [stc92@cornell.edu](mailto:stc92@cornell.edu) | | | **Phone:** +1 914 268-7025
 
 ---
 
@@ -19,12 +19,16 @@ Aspiring engineering student with a strong foundation in.... Passionate about ..
 
 #### Education
 - **Cornell University**  
-  *Bachelor of Science in Mechanical and Aerospace Engineering*  
-  GPA: 3.8/4.0 | Graduation: Month, Year
+  *Masters in Aerospace Engineering*  
+  GPA: 3.7/4.0 | Expected: December, 2026
 
-- **[High School Name]**  
+- **Cornell University**  
+  *Bachelor of Science in Mechanical and Aerospace Engineering*  
+  GPA: 3.7/4.0 | Graduation: May, 2026
+
+- **Iona Preparatory School**  
   *High School Diploma*  
-  Graduation: [Month, Year]
+  Graduation: August, 2022
 
 ---
 
