@@ -5,7 +5,7 @@ permalink: /cv/
 ---
 ## Curriculum Vitae
 A glance at my experiences holistically.<br>
-[Download my CV]({{ "/assets/CV.pdf" | relative_url }}) in PDF format.
+[Download my Resume]({{ "/assets/Ciminello_Sal_Resume.pdf" | relative_url }}) in PDF format.
 
 
 **Email:** [stc92@cornell.edu](mailto:stc92@cornell.edu) | | | **Phone:** +1 914 268-7025
@@ -13,7 +13,7 @@ A glance at my experiences holistically.<br>
 ---
 
 #### Objective
-Aspiring engineering student with a strong foundation in.... Passionate about ... and eager to apply my knowledge in real-world applications.
+Aspiring engineering student with a strong foundation in practical engineering and body dynamics. Passionate about advanced the aerospace industry and eager to apply my knowledge in real-world applications.
 
 ---
 
@@ -24,7 +24,14 @@ Aspiring engineering student with a strong foundation in.... Passionate about ..
 
 - **Cornell University**  
   *Bachelor of Science in Mechanical and Aerospace Engineering*  
-  GPA: 3.7/4.0 | Graduation: May, 2026
+  GPA: 3.7/4.0 | Graduation: May, 2026  
+  **Relevant Coursework:**  
+  - **In Progress (Spring 2026):** <br>
+  MAE 5160 Spacecraft Technology and Systems Architecture, MAE 5230 Intermediate Fluid Dynamics w/ CFD, MAE 6030 Space Structures, MAE 6540 Plasma Propulsion
+  - **Advanced / Specialty:** <br>
+  MAE 5730 Intermediate Dynamics, MAE 4510 Propulsion of Aircrafts and Rockets, MAE 4021 Wind Power, MAE 3780 Mechatronics, MAE 3260 System Dynamics, MAE 3240 Heat Transfer
+  - **Fundamentals:** <br>
+  MAE 3870 Electric Vehicles, MAE 3270 Mechanics of Materials, MAE 3230 Fluid Mechanics
 
 - **Iona Preparatory School**  
   *High School Diploma*  
