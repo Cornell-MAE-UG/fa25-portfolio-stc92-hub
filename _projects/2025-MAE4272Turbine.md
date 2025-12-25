@@ -4,6 +4,7 @@ title: MAE 4272 Turbine Design
 description: Designing and Testing a blade turbine design using blade element momentum theory
 technologies: [Autodesk Fusion, Matlab]
 image: /assets/images/turbine_tunnel.png
+featured: true
 ---
 
 For the class MAE 4272: Fluids and Heat Transfer Lab, I was tasked with designing a wind turbine, within certain constraints, and then testing that turbine across different conditions.
