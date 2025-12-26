@@ -4,6 +4,7 @@ title: MAE 4272 Turbine Design
 description: Designing and Testing a blade turbine design using blade element momentum theory
 technologies: [Autodesk Fusion, Matlab]
 image: /assets/images/turbine_tunnel.png
+skills: [Aerodynamics, Coding]
 featured: true
 ---
 
