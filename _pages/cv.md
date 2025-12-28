@@ -40,42 +40,61 @@ Aspiring engineering student with a strong foundation in practical engineering a
 ---
 
 #### Skills
-- **Software:** Autodesk Fusion 360, SolidWorks, ANSYS  
+- **Software:** Autodesk Fusion 360, SolidWorks, ANSYS (Maxwell, Static Structural, Transient Thermal), CFD
 - **Programming:** Python, MATLAB  
-- **Tools:** 3D Printing, Laser Cutting  
+- **Tools:** Additive Manufacturing, Laser Cutting, Mill and Lathe
 
 ---
 
 #### Projects
-- **[Project Title]**:  
-  *[Short Description]*  
-  - Key Achievement 1  
-  - Key Achievement 2  
 
-- **[Project Title]**:  
-  *[Short Description]*  
-  - Key Achievement 1  
-  - Key Achievement 2  
+**Active and Passive Pod Control System**  
+*Hyperloop Project Team*  
+- Modeled and simulated hyperloop pod dynamics in MATLAB assuming a functioning levitation system and designed PID controllers to maintain steady levitation height  
+- Modeled pod roll dynamics and designed a passive stability system using a caster wheel and shock absorber, calculating required damping coefficients  
+- Designed and built multiple pod subsystems including vertical and horizontal guidance systems and a mini-pod levitation system  
+
+**Mechatronics Robot**  
+*ASML–Cornell Robotics Competition*  
+- Designed a robot exoskeleton in SolidWorks featuring a servo-actuated chassis and block collection mechanism  
+- Programmed and wired an Arduino with multiple sensors (QTI, color, proximity) to determine robot location, orientation, and object proximity  
+- Placed **5th out of 65 teams** in the ASML–Cornell Robotics Competition  
+
+**Magnetic Braking System**  
+*Hyperloop Project Team*  
+- Designed and implemented a magnetic braking system using neodymium magnets and eddy current generation  
+- Modeled magnetic fields using ANSYS Maxwell to validate braking performance  
 
 ---
 
 #### Work Experience
-- **[Company Name] - Intern**  
-  [Month, Year] - [Month, Year]  
-  - Responsibility 1  
-  - Responsibility 2  
+
+**CO2Go Startup — Lead Product Engineer**  
+*May 2025 – Present*  
+- Prototyped a personal pressure vessel capable of actuating an intake valve to dispense CO₂ into the main chamber to carbonate a drink, while incorporating pressure-relief mechanisms  
+- Designed tumbler and canister modules to demonstrate feasibility to investors and support development of a higher-fidelity manufacturing prototype  
+- Worked with overseas manufacturers to design a working steel prototyping
 
 ---
 
 #### Achievements & Certifications
-- [Certification Name], [Issuing Organization], [Year]  
-- [Achievement Name], [Competition/Event], [Year]  
+
+- **5th Place Finish**, ASML–Cornell Robotics Competition, 2025  
+- **Silver Cup Medal**, Alpha Sigma Phi Fraternity (Outstanding Philanthropy Performance), 2024
 
 ---
 
 #### Extracurricular Activities
-- Member of [Club/Organization Name]  
-- Volunteer for [Event/Organization Name]  
+
+**Alpha Sigma Phi Fraternity** - Vice President   
+*2024 – 2025*  
+- Led executive board operations for a 30+ member organization, coordinating budgeting, events, and internal communications  
+- Oversaw chapter initiatives including philanthropy events and member engagement programs
+
+**Martial Arts** - Black Belt   
+*2007 - Present*
+- Trained in Tae Kwon Do and Brazilian Jiu-Jitsu
+- Black Belt Since Freshman Year of Highschool
 
 ---
 
