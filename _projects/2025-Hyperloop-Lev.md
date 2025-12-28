@@ -3,7 +3,7 @@ layout: project
 title: Electromagnetic Levitation Controls
 description: PID Control Loop for Stable Levitation
 technologies: [Solidworks, Matlab]
-skills: [Aerodynamics, Coding]
+skills: [Aerodynamics, Coding, stuff]
 image: /assets/images/lev_circuit.JPG
 featured: true
 ---
