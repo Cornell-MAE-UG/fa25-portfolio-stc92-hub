@@ -45,7 +45,7 @@ const UPGRADE_DEFS = {
       <div class="stat"><div class="label">Generators</div><div id="gens" class="value">0</div></div>
     </div>
 
-    <div class="grid">
+    <div class="game-grid">
       <!-- LEFT: Producers -->
       <div class="panel">
         <div class="panel-title">Producers</div>
