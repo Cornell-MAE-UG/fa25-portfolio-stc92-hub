@@ -11,7 +11,7 @@ const defaultState = () => ({
     genCount: 0,
     genBaseCost: 10,
     genGrowth: 1.15,
-    genCoinsPerSec: 10,
+    genCoinsPerSec: 5,
 
     upgrades: { gen10x: false },
     multipliers: { gen: 1 },
