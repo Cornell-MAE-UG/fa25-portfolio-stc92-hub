@@ -1,0 +1,49 @@
+.game { max-width: 760px; margin: 30px auto; padding: 0 16px; }
+.game-card {
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  background: white;
+}
+
+.game-header h1 { margin: 0 0 6px; }
+.muted { opacity: 0.7; font-size: 0.95rem; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.stat { padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.04); }
+.label { font-size: 0.9rem; opacity: 0.75; }
+.value { font-size: 1.35rem; font-weight: 700; margin-top: 4px; }
+
+.actions { margin: 14px 0 18px; }
+button {
+  border-radius: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: white;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.primary { font-size: 1.05rem; font-weight: 700; }
+.shop { margin-top: 10px; }
+.shop-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.03);
+}
+.shop-title { font-weight: 700; margin-bottom: 2px; }
+
+.footer { display: flex; gap: 10px; align-items: center; margin-top: 14px; }
+.ghost { background: transparent; }
+.danger { border-color: rgba(220,0,0,0.25); }
+#status { margin-left: auto; }
