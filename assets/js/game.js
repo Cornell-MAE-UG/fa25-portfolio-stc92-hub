@@ -36,6 +36,9 @@ const UPGRADE_DEFS = {
   <div class="game-card">
     <div class="game-header">
       <h1>Incremental Game</h1>
+      <p class="description">
+        I like these idle-clicker games so I'm in my spare time trying to build my own version.
+        </p>
       <div class="muted">localStorage save • offline progress</div>
     </div>
 
