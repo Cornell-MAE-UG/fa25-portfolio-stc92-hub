@@ -67,7 +67,7 @@ This project strengthened my understanding of **aerodynamic modeling, numerical 
 ## Full Report
 The complete design process, derivations, simulations, and results are documented in the full senior design report:
 
-[Download the full 40-Page Report (PDF)]({{ "/assets/Senior_Design_Project.pdf" | relative_url }}) in PDF format.
+[Download the full 35-Page Report (PDF)]({{ "/assets/Senior_Design_Project.pdf" | relative_url }}) in PDF format.
 
 ---
 
