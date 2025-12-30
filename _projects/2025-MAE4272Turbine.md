@@ -5,7 +5,7 @@ description: Designing and Testing a blade turbine design using blade element mo
 technologies: [Autodesk Fusion, Matlab]
 image: /assets/images/turbine_tunnel.png
 skills: [Aerodynamics, Coding]
-featured: true
+featured: false
 ---
 
 For the class MAE 4272: Fluids and Heat Transfer Lab, I was tasked with designing a wind turbine, within certain constraints, and then testing that turbine across different conditions.
