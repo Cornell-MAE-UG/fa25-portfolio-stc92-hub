@@ -1,8 +1,9 @@
 const game = document.getElementById("game")
 
 game.innerHTML = `
-<h1>Climate Crisis: Beer Company</h1>
+<div class="game-card">
 
+<h1>Climate Crisis: Beer Company</h1>
 <p class="description">
 You run a beer company in a warming world. Each year lasts <b>10 seconds</b>.
 Climate change slowly increases droughts and crop failures, making beer harder to produce.
@@ -44,7 +45,8 @@ Next Year In: <span id="countdown">10</span>s
 </div>
 
 <h3>Event Log</h3>
-<div id="log"></div>
+<div id="log" class="log-box"></div>
+</div>
 `
 
 let year = 1
@@ -62,21 +64,49 @@ function updateStats(){
 document.getElementById("year").innerText = year
 document.getElementById("countdown").innerText = countdown
 
-document.getElementById("stats").innerHTML =
-`
-Money: $${Math.floor(money)} <br>
-Beer Quality: ${Math.floor(quality)} <br>
-Water Supply: ${Math.floor(water)} <br>
-Barley Supply: ${Math.floor(barley)} <br>
-Hops Supply: ${Math.floor(hops)} <br>
-Climate Stress: ${Math.floor(climate)}
+document.getElementById("stats").innerHTML = `
+<div class="stats">
+
+<div class="stat">
+<div class="label">Money</div>
+<div class="value">$${Math.floor(money)}</div>
+</div>
+
+<div class="stat">
+<div class="label">Beer Quality</div>
+<div class="value">${Math.floor(quality)}</div>
+</div>
+
+<div class="stat">
+<div class="label">Water</div>
+<div class="value">${Math.floor(water)}</div>
+</div>
+
+<div class="stat">
+<div class="label">Barley</div>
+<div class="value">${Math.floor(barley)}</div>
+</div>
+
+<div class="stat">
+<div class="label">Hops</div>
+<div class="value">${Math.floor(hops)}</div>
+</div>
+
+<div class="stat">
+<div class="label">Climate Stress</div>
+<div class="value">${Math.floor(climate)}</div>
+</div>
+
+</div>
 `
 }
 
 function log(text){
 
-document.getElementById("log").innerHTML =
-text + "<br>" + document.getElementById("log").innerHTML
+const logBox = document.getElementById("log")
+
+logBox.innerHTML =
+`<div class="log-entry">${text}</div>` + logBox.innerHTML
 
 }
 
