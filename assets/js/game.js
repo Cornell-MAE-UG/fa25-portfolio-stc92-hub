@@ -1,266 +1,219 @@
-(() => {
-  const SAVE_KEY = "sal_incremental_v1";
-  const OFFLINE_CAP_SEC = 24 * 60 * 60; // cap offline gains to 24h
+const game = document.getElementById("game")
 
-  // ----- State -----
-const defaultState = () => ({
-    coins: 0,
-    totalCoins: 0,
-    clickPower: 1,
+game.innerHTML = `
+<h1>Climate Crisis: Beer Company</h1>
 
-    genCount: 0,
-    genBaseCost: 10,
-    genGrowth: 1.15,
-    genCoinsPerSec: 5,
+<p class="description">
+You run a beer company in a warming world. Each year lasts <b>10 seconds</b>.
+Climate change slowly increases droughts and crop failures, making beer harder to produce.
 
-    upgrades: { gen10x: false },
-    multipliers: { gen: 1 },
+Ingredients needed for beer:
+• Water
+• Barley
+• Hops
 
-    lastSaved: Date.now()
-});
-const UPGRADE_DEFS = {
-  gen10x: {
-    name: "10× Generators",
-    desc: "Generators produce 10× more coins/sec.",
-    cost: 1000,
-    apply: () => { state.multipliers.gen *= 10; state.upgrades.gen10x = true; }
-  }
-};
+If any of these run out, production collapses.
 
+Every year climate stress increases, which:
+• increases drought risk
+• reduces crop yields
+• slowly lowers beer quality
 
-  let state = loadState();
+Your goal is to stay profitable as long as possible.
+</p>
 
-  // ----- UI -----
-  const root = document.getElementById("game");
-  root.innerHTML = `
-  <div class="game-card">
-    <div class="game-header">
-      <h1>Incremental Game</h1>
-      <p class="description">
-        I like these idle-clicker games so I'm in my spare time trying to build my own version.
-        </p>
-      <div class="muted">localStorage save • offline progress</div>
-    </div>
+<div class="timer">
+Year: <span id="year"></span> |
+Next Year In: <span id="countdown">10</span>s
+</div>
 
-    <div class="stats">
-      <div class="stat"><div class="label">Coins</div><div id="coins" class="value">0</div></div>
-      <div class="stat"><div class="label">Coins / sec</div><div id="cps" class="value">0</div></div>
-      <div class="stat"><div class="label">Generators</div><div id="gens" class="value">0</div></div>
-    </div>
+<div id="stats"></div>
 
-    <div class="game-grid">
-      <!-- LEFT: Producers -->
-      <div class="panel">
-        <div class="panel-title">Producers</div>
+<div class="actions">
 
-        <div class="actions">
-          <button id="clickBtn" class="primary">+<span id="clickPower">1</span> coin</button>
-        </div>
+<button onclick="produce()">🍺 Produce Beer<br><span>Uses ingredients. Profit depends on quality.</span></button>
 
-        <div class="shop">
-          <div class="shop-row">
-            <div>
-              <div class="shop-title">Generator</div>
-              <div class="muted">
-                Adds <b>${format(state.genCoinsPerSec)}</b> coins/sec each
-              </div>
-            </div>
-            <button id="buyGenBtn">Buy (<span id="genCost"></span>)</button>
-          </div>
-        </div>
-      </div>
+<button onclick="irrigation()">💧 Invest in Irrigation<br><span>Cost $200. Restores water.</span></button>
 
-      <!-- RIGHT: Upgrades -->
-      <div class="panel">
-        <div class="panel-title">Upgrades</div>
-        <div id="upgrades"></div>
-      </div>
-    </div>
+<button onclick="importIngredients()">🚢 Import Ingredients<br><span>Cost $150. Restores barley + hops.</span></button>
 
-    <div class="footer">
-      <button id="saveBtn" class="ghost">Save</button>
-      <button id="resetBtn" class="danger">Hard Reset</button>
-      <span id="status" class="muted"></span>
-    </div>
-  </div>
-`;
+<button onclick="research()">🧪 Climate Crop Research<br><span>Cost $300. Improves beer quality.</span></button>
 
-  const elCoins = root.querySelector("#coins");
-  const elCps = root.querySelector("#cps");
-  const elGens = root.querySelector("#gens");
-  const elClickPower = root.querySelector("#clickPower");
-  const elGenCost = root.querySelector("#genCost");
-  const elStatus = root.querySelector("#status");
+<button onclick="raisePrices()">💰 Raise Beer Prices<br><span>Earn $50 but quality drops slightly.</span></button>
 
-  const clickBtn = root.querySelector("#clickBtn");
-  const buyGenBtn = root.querySelector("#buyGenBtn");
-  const saveBtn = root.querySelector("#saveBtn");
-  const resetBtn = root.querySelector("#resetBtn");
-  const upgradesRoot = root.querySelector("#upgrades");
+</div>
 
-  // ----- Mechanics -----
-  function coinsPerSec() {
-    return state.genCount * state.genCoinsPerSec * state.multipliers.gen;
-  }
+<h3>Event Log</h3>
+<div id="log"></div>
+`
 
-  function genCost() {
-    // exponential cost growth
-    return state.genBaseCost * Math.pow(state.genGrowth, state.genCount);
-  }
+let year = 1
+let money = 1000
+let quality = 100
+let water = 100
+let barley = 100
+let hops = 100
+let climate = 0
 
-  function addCoins(amount) {
-    state.coins += amount;
-    state.totalCoins += Math.max(0, amount);
-  }
+let countdown = 10
 
-  // Click
-  clickBtn.addEventListener("click", () => {
-    addCoins(state.clickPower);
-    render();
-  });
+function updateStats(){
 
-  // Buy generator
-  buyGenBtn.addEventListener("click", () => {
-    const cost = genCost();
-    if (state.coins >= cost) {
-      state.coins -= cost;
-      state.genCount += 1;
-      render();
-      saveState();
-      flash(`Bought generator #${state.genCount}`);
-    } else {
-      flash("Not enough coins.");
-    }
-  });
+document.getElementById("year").innerText = year
+document.getElementById("countdown").innerText = countdown
 
-  // Save
-  saveBtn.addEventListener("click", () => {
-    saveState();
-    flash("Saved.");
-  });
-
-  // Reset
-  resetBtn.addEventListener("click", () => {
-    if (!confirm("Reset the game? This deletes your save.")) return;
-    localStorage.removeItem(SAVE_KEY);
-    state = defaultState();
-    render();
-    flash("Reset complete.");
-  });
-
-  // ----- Offline progress -----
-  applyOfflineProgress();
-  render();
-  saveState(); // update lastSaved after offline calc
-
-  // ----- Loops -----
-  let lastTick = performance.now();
-
-  // Simulation tick (~10 fps). Uses dt for smoothness.
-  setInterval(() => {
-    const now = performance.now();
-    const dt = (now - lastTick) / 1000;
-    lastTick = now;
-
-    const cps = coinsPerSec();
-    if (cps > 0) addCoins(cps * dt);
-
-    render(); // MVP: just render every tick
-  }, 100);
-
-  // Autosave every 10s
-  setInterval(() => saveState(), 10000);
-
-  // ----- Helpers -----
-  function render() {
-  elCoins.textContent = format(state.coins);
-  elCps.textContent = format(coinsPerSec());
-  elGens.textContent = String(state.genCount);
-  elClickPower.textContent = String(state.clickPower);
-
-  const cost = genCost();
-  elGenCost.textContent = format(cost);
-  buyGenBtn.disabled = state.coins < cost;
-
-  renderUpgrades();
+document.getElementById("stats").innerHTML =
+`
+Money: $${Math.floor(money)} <br>
+Beer Quality: ${Math.floor(quality)} <br>
+Water Supply: ${Math.floor(water)} <br>
+Barley Supply: ${Math.floor(barley)} <br>
+Hops Supply: ${Math.floor(hops)} <br>
+Climate Stress: ${Math.floor(climate)}
+`
 }
 
-  function renderUpgrades() {
-  upgradesRoot.innerHTML = "";
+function log(text){
 
-  // Only one upgrade for now
-  const def = UPGRADE_DEFS.gen10x;
-  const owned = state.upgrades.gen10x;
+document.getElementById("log").innerHTML =
+text + "<br>" + document.getElementById("log").innerHTML
 
-  const row = document.createElement("div");
-  row.className = "upgrade-row";
-
-  const left = document.createElement("div");
-  left.innerHTML = `
-    <div class="shop-title">${def.name}</div>
-    <div class="muted">${def.desc}</div>
-    <div class="muted">Cost: <b>${format(def.cost)}</b></div>
-  `;
-
-  const btn = document.createElement("button");
-  btn.textContent = owned ? "Purchased" : "Buy";
-  btn.disabled = owned || state.coins < def.cost;
-
-  btn.addEventListener("click", () => {
-    if (state.coins < def.cost || owned) return;
-    state.coins -= def.cost;
-    def.apply();
-    saveState();
-    render();
-    flash("Upgrade purchased.");
-  });
-
-  row.appendChild(left);
-  row.appendChild(btn);
-  upgradesRoot.appendChild(row);
 }
 
-  function applyOfflineProgress() {
-    const now = Date.now();
-    const last = state.lastSaved ?? now;
-    const offlineSec = Math.min(OFFLINE_CAP_SEC, Math.max(0, (now - last) / 1000));
-    const gained = coinsPerSec() * offlineSec;
+function produce(){
 
-    if (offlineSec >= 1 && gained > 0) {
-      addCoins(gained);
-      flash(`Offline: +${format(gained)} coins (${Math.floor(offlineSec)}s)`);
-    }
-  }
+if(water < 10 || barley < 10 || hops < 10){
 
-  function saveState() {
-    state.lastSaved = Date.now();
-    localStorage.setItem(SAVE_KEY, JSON.stringify(state));
-  }
+log("⚠️ Not enough ingredients to produce beer.")
+return
 
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(SAVE_KEY);
-      if (!raw) return defaultState();
-      const parsed = JSON.parse(raw);
-      return { ...defaultState(), ...parsed };
-    } catch {
-      return defaultState();
-    }
-  }
+}
 
-  function flash(msg) {
-    elStatus.textContent = msg;
-    setTimeout(() => {
-      if (elStatus.textContent === msg) elStatus.textContent = "";
-    }, 2000);
-  }
+let profit = Math.floor(quality * 2)
 
-  function format(n) {
-    // simple formatting (no libraries)
-    if (!isFinite(n)) return "0";
-    if (n < 1000) return n.toFixed(2).replace(/\.00$/, "");
-    if (n < 1e6) return (n / 1e3).toFixed(2) + "k";
-    if (n < 1e9) return (n / 1e6).toFixed(2) + "M";
-    return (n / 1e9).toFixed(2) + "B";
-  }
-})();
+money += profit
+water -= 10
+barley -= 10
+hops -= 10
+
+log(`🍺 Produced beer and earned $${profit}.`)
+
+updateStats()
+
+}
+
+function irrigation(){
+
+if(money < 200){
+log("⚠️ Not enough money for irrigation.")
+return
+}
+
+money -= 200
+water += 25
+
+log("💧 Irrigation investment increased water supply.")
+
+updateStats()
+
+}
+
+function importIngredients(){
+
+if(money < 150){
+log("⚠️ Imports are too expensive.")
+return
+}
+
+money -= 150
+barley += 20
+hops += 20
+
+log("🚢 Imported barley and hops.")
+
+updateStats()
+
+}
+
+function research(){
+
+if(money < 300){
+log("⚠️ Research funding unavailable.")
+return
+}
+
+money -= 300
+quality += 8
+
+log("🧪 Crop research improved beer quality.")
+
+updateStats()
+
+}
+
+function raisePrices(){
+
+money += 50
+quality -= 2
+
+log("💰 Prices increased. Customers complain slightly.")
+
+updateStats()
+
+}
+
+function newYear(){
+
+year++
+climate += 5
+
+water -= 5 + climate*0.05
+barley -= 3 + climate*0.05
+hops -= 3 + climate*0.05
+quality -= climate*0.02
+
+if(Math.random() < 0.3){
+
+water -= 15
+log("🌵 Drought reduced water supply.")
+
+}
+
+if(Math.random() < 0.2){
+
+barley -= 10
+hops -= 10
+log("🔥 Heat wave damaged crop yields.")
+
+}
+
+if(money <= 0 || water <= 0 || quality <= 0){
+
+log("💀 GAME OVER — your brewery collapsed.")
+clearInterval(timer)
+
+}
+
+countdown = 10
+
+updateStats()
+
+}
+
+function tick(){
+
+countdown--
+
+if(countdown <= 0){
+
+newYear()
+
+}
+
+updateStats()
+
+}
+
+updateStats()
+
+let timer = setInterval(tick,1000)
