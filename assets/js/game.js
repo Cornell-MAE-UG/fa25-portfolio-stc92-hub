@@ -44,7 +44,7 @@ Next Year In: <span id="countdown">10</span>s
 
 </div>
 
-<h3>Event Log</h3>
+<h3>Event Log v2</h3>
 <div id="log" class="log-box"></div>
 </div>
 `
@@ -147,7 +147,7 @@ log("💧 Irrigation investment increased water supply.")
 updateStats()
 
 }
-
+console.log("version 2 loaded")
 function importIngredients(){
 
 if(money < 150){
