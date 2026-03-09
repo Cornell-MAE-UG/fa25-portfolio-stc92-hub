@@ -9,7 +9,7 @@ title: Sal Ciminello
 ![Profile Picture]({{ "assets/images/profile-pic.jpg" | relative_url }}){: class="profile-image"}
 
  
-My name is {{ site.name }}, and I am good at math. 
+My name is {{ site.name }}, and I am good at math.
 
 That is my short synopsis, but moreover I am currently a senior in Cornell Engineering, studying Mechanical Engineering with a concentration in aerospace. In the upcoming spring semester, I will be starting my Master’s in Aerospace Engineering at Cornell. My primary academic focus is rigid body dynamics, which is the study of how objects move in three-dimensional space, including both translational and rotational motion, along with aerodynamic design.
 
