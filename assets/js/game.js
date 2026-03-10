@@ -44,7 +44,7 @@ Next Year In: <span id="countdown">10</span>s
 
 </div>
 
-<h3>Event Log v2</h3>
+<h3>Event Log</h3>
 <div id="log" class="log-box"></div>
 </div>
 `
@@ -147,7 +147,7 @@ log("💧 Irrigation investment increased water supply.")
 updateStats()
 
 }
-console.log("version 2 loaded")
+
 function importIngredients(){
 
 if(money < 150){
@@ -217,42 +217,9 @@ log("🔥 Heat wave damaged crop yields.")
 
 }
 
-if(money <= 0){
+if(money <= 0 || water <= 0 || quality <= 0){
 
-log("💀 GAME OVER — your brewery went bankrupt.")
-log("Without money you cannot pay workers or buy ingredients.")
-clearInterval(timer)
-
-}
-
-else if(water <= 0){
-
-log("💀 GAME OVER — water supplies collapsed.")
-log("Drought and climate stress eliminated the water needed for brewing.")
-clearInterval(timer)
-
-}
-
-else if(barley <= 0){
-
-log("💀 GAME OVER — barley crops failed.")
-log("Climate impacts destroyed the barley harvest needed for beer.")
-clearInterval(timer)
-
-}
-
-else if(hops <= 0){
-
-log("💀 GAME OVER — hop production collapsed.")
-log("Rising temperatures damaged hop yields.")
-clearInterval(timer)
-
-}
-
-else if(quality <= 0){
-
-log("💀 GAME OVER — beer quality collapsed.")
-log("Consumers stopped buying low-quality beer.")
+log("💀 GAME OVER — your brewery collapsed.")
 clearInterval(timer)
 
 }
