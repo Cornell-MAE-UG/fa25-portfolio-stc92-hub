@@ -47,6 +47,15 @@ Next Year In: <span id="countdown">10</span>s
 <h3>Event Log</h3>
 <div id="log" class="log-box"></div>
 </div>
+
+<div id="gameOverOverlay" class="game-over-overlay">
+  <div class="game-over-box">
+    <h1>GAME OVER</h1>
+    <p>Your brewery went bankrupt.</p>
+    <button onclick="location.reload()">Restart Brewery</button>
+  </div>
+</div>
+
 `
 
 let year = 1
@@ -147,7 +156,17 @@ log("💧 Irrigation investment increased water supply.")
 updateStats()
 
 }
+function triggerGameOver(){
 
+document.body.style.transition = "background 2s"
+document.body.style.background = "#8B0000"
+
+const overlay = document.getElementById("gameOverOverlay")
+overlay.classList.add("show")
+
+clearInterval(timer)
+
+}
 function importIngredients(){
 
 if(money < 150){
@@ -220,7 +239,7 @@ log("🔥 Heat wave damaged crop yields.")
 if(money <= 0 || water <= 0 || quality <= 0){
 
 log("💀 GAME OVER — your brewery collapsed.")
-clearInterval(timer)
+triggerGameOver()
 
 }
 
